@@ -141,7 +141,7 @@ def resource_path(relative_path):
 
 
 def play_tada():
-    playsound('tada.mp3')
+    playsound(resource_path('tada.mp3'))
 
 
 def pretty_print(json_string):
