@@ -447,7 +447,6 @@ def try_reservation(organization_code, vaccine_type):
             continue
         if key == 'code' and value == "NO_VACANCY":
             print("잔여백신 접종 신청이 선착순 마감되었습니다.")
-            time.sleep(0.08)
         elif key == 'code' and value == "TIMEOUT":
             print("TIMEOUT, 예약을 재시도합니다.")
             retry_reservation(organization_code, vaccine_type)
@@ -479,7 +478,6 @@ def retry_reservation(organization_code, vaccine_type):
             continue
         if key == 'code' and value == "NO_VACANCY":
             print("잔여백신 접종 신청이 선착순 마감되었습니다.")
-            time.sleep(0.08)
         elif key == 'code' and value == "SUCCESS":
             print("백신접종신청 성공!!!")
             organization_code_success = response_json.get("organization")
