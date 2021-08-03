@@ -173,7 +173,16 @@ def load_search_time():
             'config', 'search_time', fallback=0.2)
 
         if input_time < 0.1:
-            search_time = 0.1
+            confirm_input = None
+            while confirm_input is None:
+                confirm_input = str.lower(input("과도하게 딜레이를 줄이면 계정 정지의 위험이 있습니다. 계속하시겠습니까? Y/N : "))
+                if confirm_input == "y":
+                    search_time = input_time
+                elif confirm_input == "n":
+                    print("search_time이 기본값 0.2로 설정되었습니다.")
+                else:
+                    print("Y 또는 N을 입력해 주세요.")
+                    confirm_input = None
         else:
             search_time = input_time
 
