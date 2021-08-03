@@ -466,7 +466,7 @@ def try_reservation(organization_code, vaccine_type):
 
 
 def retry_reservation(organization_code, vaccine_type):
-    reservation_url = 'https://vaccine.kakao.com/api/v1/reservation/retry'
+    reservation_url = 'https://vaccine.kakao.com/api/v2/reservation/retry'
 
     data = {"from": "Map", "vaccineCode": vaccine_type,
             "orgCode": organization_code, "distance": None}
