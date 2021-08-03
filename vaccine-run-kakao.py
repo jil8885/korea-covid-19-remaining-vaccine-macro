@@ -507,7 +507,7 @@ def retry_reservation(organization_code, vaccine_type):
 # pylint: disable=too-many-locals,too-many-statements,too-many-branches,too-many-arguments
 def find_vaccine(vaccine_type, top_x, top_y, bottom_x, bottom_y, only_left):
     url = 'https://vaccine-map.kakao.com/api/v3/vaccine/left_count_by_coords'
-    data = {"bottomRight": {"x": bottom_x, "y": bottom_y}, "onlyLeft": only_left, "order": "latitude",
+    data = {"bottomRight": {"x": bottom_x, "y": bottom_y}, "onlyLeft": only_left, "order": "count",
             "topLeft": {"x": top_x, "y": top_y}}
     done = False
     found = None
@@ -520,8 +520,6 @@ def find_vaccine(vaccine_type, top_x, top_y, bottom_x, bottom_y, only_left):
 
             try:
                 json_data = json.loads(response.text)
-                pretty_print(json_data)
-                print(datetime.now())
 
                 for x in json_data.get("organizations"):
                     if x.get('status') == "AVAILABLE" or x.get('leftCounts') != 0:
@@ -529,6 +527,10 @@ def find_vaccine(vaccine_type, top_x, top_y, bottom_x, bottom_y, only_left):
                         done = True
                         break
 
+                if not done:
+                    pretty_print(json_data)
+                    print(datetime.now())
+                
             except json.decoder.JSONDecodeError as decodeerror:
                 print("JSONDecodeError : ", decodeerror)
                 print("JSON string : ", response.text)
