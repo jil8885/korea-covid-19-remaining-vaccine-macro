@@ -358,7 +358,7 @@ def dump_config(vaccine_type, top_x, top_y, bottom_x, bottom_y, only_left):
     conf["topY"] = top_y
     conf["botX"] = bottom_x
     conf["botY"] = bottom_y
-    conf["search_time"] = float(search_time)
+    conf["search_time"] = str(search_time)
     conf["onlyLeft"] = "True" if only_left else "False"
 
     with open("config.ini", "w") as config_file:
