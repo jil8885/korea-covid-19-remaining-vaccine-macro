@@ -348,7 +348,7 @@ def input_config():
     dump_config(vaccine_type, top_x, top_y, bottom_x, bottom_y, only_left)
     return vaccine_type, top_x, top_y, bottom_x, bottom_y, only_left
 
-
+# pylint: disable=too-many-arguments
 def dump_config(vaccine_type, top_x, top_y, bottom_x, bottom_y, only_left):
     config_parser = configparser.ConfigParser()
     config_parser['config'] = {}
@@ -504,7 +504,7 @@ def retry_reservation(organization_code, vaccine_type):
 #     driver.add_cookie(cookie)
 #     print(cookie)
 
-# pylint: disable=too-many-locals,too-many-statements,too-many-branches
+# pylint: disable=too-many-locals,too-many-statements,too-many-branches,too-many-arguments
 def find_vaccine(vaccine_type, top_x, top_y, bottom_x, bottom_y, only_left):
     url = 'https://vaccine-map.kakao.com/api/v3/vaccine/left_count_by_coords'
     data = {"bottomRight": {"x": bottom_x, "y": bottom_y}, "onlyLeft": only_left, "order": "latitude",
