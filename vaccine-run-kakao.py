@@ -208,10 +208,10 @@ def check_user_info_loaded():
             print("상태를 알 수 없는 사용자입니다. 1339 또는 보건소에 문의해주세요.")
             close(success=None)
         elif user_info['status'] == "REFUSED":
-            print("백신을 예약하고 방문하지 않은 사용자로 파악됩니다. 잔여백신 예약이 불가합니다.")
+            print(f"{user_info['name']}님은 백신을 예약하고 방문하지 않은 사용자로 파악됩니다. 잔여백신 예약이 불가합니다.")
             close(success=None)
         elif user_info['status'] == "ALREADY_RESERVED" or user_info['status'] == "ALREADY_VACCINATED":
-            print("이미 접종이 완료되었거나 예약이 완료된 사용자입니다.")
+            print(f"{user_info['name']}님은 이미 예약 또는 접종이 완료된 사용자입니다.")
             close(success=None)
         else:
             print(f"알려지지 않은 상태 코드입니다. 상태코드:{user_info['status']}")
