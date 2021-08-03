@@ -350,7 +350,7 @@ class Headers:
 
 
 def try_reservation(organization_code, vaccine_type):
-    reservation_url = 'https://vaccine.kakao.com/api/v1/reservation'
+    reservation_url = 'https://vaccine.kakao.com/api/v2/reservation'
     data = {"from": "Map", "vaccineCode": vaccine_type,
             "orgCode": organization_code, "distance": None}
     response = requests.post(reservation_url, data=json.dumps(
@@ -422,7 +422,7 @@ def retry_reservation(organization_code, vaccine_type):
 
 # pylint: disable=too-many-locals,too-many-statements,too-many-branches
 def find_vaccine(vaccine_type, top_x, top_y, bottom_x, bottom_y):
-    url = 'https://vaccine-map.kakao.com/api/v2/vaccine/left_count_by_coords'
+    url = 'https://vaccine-map.kakao.com/api/v3/vaccine/left_count_by_coords'
     data = {"bottomRight": {"x": bottom_x, "y": bottom_y}, "onlyLeft": False, "order": "latitude",
             "topLeft": {"x": top_x, "y": top_y}}
     done = False
@@ -481,7 +481,7 @@ def find_vaccine(vaccine_type, top_x, top_y, bottom_x, bottom_y):
     vaccine_found_code = None
 
     if vaccine_type == "ANY":  # ANY 백신 선택
-        check_organization_url = f'https://vaccine.kakao.com/api/v2/org/org_code/{organization_code}'
+        check_organization_url = f'https://vaccine.kakao.com/api/v3/org/org_code/{organization_code}'
         check_organization_response = requests.get(check_organization_url, headers=Headers.headers_vacc, cookies=jar,
                                                    verify=False)
         check_organization_data = json.loads(
