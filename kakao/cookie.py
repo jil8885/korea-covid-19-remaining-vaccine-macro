@@ -99,9 +99,13 @@ def load_cookie_from_chrome():
 
     jar = browser_cookie3.chrome(cookie_file=cookie_file, domain_name=".kakao.com")
 
+    cookie_dict = {}
+
     # 쿠키를 cookie.ini 에 저장한다
     for cookie in jar:
         if cookie.name == '_kawlt':
+            cookie_dict['_kawlt'] = cookie.value
             dump_cookie(cookie.value)
             break
-    return jar
+
+    return cookie_dict
