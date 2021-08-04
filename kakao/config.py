@@ -134,15 +134,18 @@ def load_config():
                     print("Y 또는 N을 입력해 주세요.")
 
             if skip_input:
-                # 설정 파일이 있으면 최근 로그인 정보 로딩
-                configuration = config_parser['config']
-                previous_used_type = configuration["VAC"]
-                previous_top_x = configuration["topX"]
-                previous_top_y = configuration["topY"]
-                previous_bottom_x = configuration["botX"]
-                previous_bottom_y = configuration["botY"]
-                previous_only_left = configuration["onlyLeft"] == "True"
-                return previous_used_type, previous_top_x, previous_top_y, previous_bottom_x, previous_bottom_y, previous_only_left
+                try:
+                    # 설정 파일이 있으면 최근 로그인 정보 로딩
+                    configuration = config_parser['config']
+                    previous_used_type = configuration["VAC"]
+                    previous_top_x = configuration["topX"]
+                    previous_top_y = configuration["topY"]
+                    previous_bottom_x = configuration["botX"]
+                    previous_bottom_y = configuration["botY"]
+                    previous_only_left = configuration["onlyLeft"] == "True"
+                    return previous_used_type, previous_top_x, previous_top_y, previous_bottom_x, previous_bottom_y, previous_only_left
+                except KeyError:
+                    print('기존에 입력한 정보가 없습니다.')
             else:
                 return None, None, None, None, None, None
         except ValueError:
