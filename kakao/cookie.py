@@ -105,4 +105,3 @@ def load_cookie_from_chrome():
             dump_cookie(cookie.value)
             break
     return jar
-
