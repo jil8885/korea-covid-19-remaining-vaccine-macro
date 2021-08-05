@@ -35,14 +35,14 @@ def resource_path(relative_path):
 
 def play_tada():
     try:
-        playsound(resource_path('tada.mp3'))
+        playsound(resource_path('sound/tada.mp3'))
     except PlaysoundException:
         pass
 
 
 def play_xylophon():
     try:
-        playsound(resource_path('xylophon.mp3'))
+        playsound(resource_path('sound/xylophon.mp3'))
     except PlaysoundException:
         pass
 
