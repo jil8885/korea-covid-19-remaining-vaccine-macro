@@ -37,14 +37,14 @@ def play_tada():
     try:
         playsound(resource_path('sound/tada.mp3'))
     except PlaysoundException:
-        pass
+        print("ERROR: sound/tada.mp3를 재생하지 못했습니다.")
 
 
 def play_xylophon():
     try:
         playsound(resource_path('sound/xylophon.mp3'))
     except PlaysoundException:
-        pass
+        print("ERROR: sound/xylophon.mp3를 재생하지 못했습니다.")
 
 
 def send_msg(msg):
