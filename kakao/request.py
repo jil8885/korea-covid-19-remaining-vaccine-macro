@@ -126,8 +126,7 @@ def find_vaccine(cookie, search_time, vaccine_type, top_x, top_y, bottom_x, bott
                     print(f"{x.get('vaccineName')} 백신을 {x.get('leftCount')}개 발견했습니다.")
                     vaccine_found_code = vaccine_type
                     print(f"{vaccine_found_code} 으로 예약을 시도합니다.")        
-                    if try_reservation(organization_code, vaccine_found_code, cookie):
-                        return None
+                    try_reservation(organization_code, vaccine_found_code, cookie)
             if not is_vac:
                 print(f"{vaccine_type} 백신은 없습니다.")
                 
