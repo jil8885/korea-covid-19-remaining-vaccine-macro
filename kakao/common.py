@@ -9,11 +9,11 @@ from playsound import playsound, PlaysoundException
 
 def close(success=False):
     if success is True:
-        play_tada()
         send_msg("잔여백신 예약 성공!! \n 카카오톡지갑을 확인하세요.")
+        play_tada()
     elif success is False:
-        play_xylophon()
         send_msg("오류와 함께 잔여백신 예약 프로그램이 종료되었습니다.")
+        play_xylophon()
     else:
         pass
     input("Press Enter to close...")
@@ -37,14 +37,14 @@ def play_tada():
     try:
         playsound(resource_path('sound/tada.mp3'))
     except PlaysoundException:
-        pass
+        print("ERROR: sound/tada.mp3를 재생하지 못했습니다.")
 
 
 def play_xylophon():
     try:
         playsound(resource_path('sound/xylophon.mp3'))
     except PlaysoundException:
-        pass
+        print("ERROR: sound/xylophon.mp3를 재생하지 못했습니다.")
 
 
 def send_msg(msg):
