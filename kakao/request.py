@@ -91,8 +91,7 @@ def find_vaccine(cookie, search_time, vaccine_type, top_x, top_y, bottom_x, bott
             close()
 
     if found is None:
-        find_vaccine(cookie, search_time, vaccine_type, top_x, top_y, bottom_x, bottom_y, only_left)
-        return None
+        return True  # no_vaccine = True
 
     # 실제 백신 남은수량 확인
     vaccine_found_code = None
@@ -133,11 +132,10 @@ def find_vaccine(cookie, search_time, vaccine_type, top_x, top_y, bottom_x, bott
                 print(f"{vaccine_type} 백신은 없습니다.")
                 
 
-    if vaccine_found_code and try_reservation(organization_code, vaccine_found_code, cookie):
-        return None
-    else:
-        find_vaccine(cookie, search_time, vaccine_type, top_x, top_y, bottom_x, bottom_y, only_left)
-        return None
+    if vaccine_found_code:
+        try_reservation(organization_code, vaccine_found_code, cookie)
+
+    return True  # no_vaccine = True
 
 
 def try_reservation(organization_code, vaccine_type, jar):
