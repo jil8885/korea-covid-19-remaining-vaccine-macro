@@ -33,9 +33,11 @@ headers_vaccine = {
     "Keep-Alive": "timeout=5, max=1000"
 }
 
+banlist = {}
 
 # pylint: disable=too-many-locals,too-many-statements,too-many-branches,too-many-arguments
 def find_vaccine(cookie, search_time, vaccine_type, top_x, top_y, bottom_x, bottom_y, only_left):
+    global banlist
     url = 'https://vaccine-map.kakao.com/api/v3/vaccine/left_count_by_coords'
     data = {"bottomRight": {"x": bottom_x, "y": bottom_y}, "onlyLeft": only_left, "order": "count",
             "topLeft": {"x": top_x, "y": top_y}}
@@ -52,6 +54,10 @@ def find_vaccine(cookie, search_time, vaccine_type, top_x, top_y, bottom_x, bott
                 json_data = json.loads(response.text)
 
                 for x in json_data.get("organizations"):
+                    orgName = x.get('orgName')
+                    if orgName in banlist.keys() and banlist[orgName] == x.get('leftCounts'):
+                        # it is banned.
+                        continue
                     if x.get('status') == "AVAILABLE" or x.get('leftCounts') != 0:
                         found = x
                         all_list.append(x)
@@ -128,6 +134,7 @@ def find_vaccine(cookie, search_time, vaccine_type, top_x, top_y, bottom_x, bott
                     print(f"{vaccine_found_code} 으로 예약을 시도합니다.")        
                     try_reservation(organization_code, vaccine_found_code, cookie)
             if not is_vac:
+                banlist[y.get('orgName')] = y.get('leftCounts')
                 print(f"{vaccine_type} 백신은 없습니다.")
                 
 
